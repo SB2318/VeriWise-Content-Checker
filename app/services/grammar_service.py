@@ -14,15 +14,42 @@ class GrammarService:
 
         is_correct = len(matches) == 0
 
+        # Calculate corrected percentage and find suggestions
+        totalLength = len(plainText)
+        errorLengthSum = sum([m.errorLength for m in matches])
+        correction_percentage = 100.0 * (1 - (errorLengthSum / totalLength)) if totalLength else 100.0
+
+        # predict approval
+        approval = correction_percentage >= 80.0
         
-        suggestions = [(m.ruleId, m.message, m.replacements) for m in matches]
-        return suggestions
+        #predict suggestions
+        suggestions = []
+        for match in matches:
+            suggestions.append({
+                'suggested': match.replacements,
+                'start': match.offset,
+                'length': match.errorLength,
+                'ruleId': match.ruleId,
+                'message': match.message,
+                'context': match.context
+            })
+        
+        
 
 
-# TODO
-# 1. Add a function to get the grammar rules for a given text
-# 2. Check whether some document is grammatically correct or not, and return the boolean result, not the corrected code
-# 3. Return suggested grammar for a text
-# 4. Check Grammar of plain text
+        # suggestions = [(m.ruleId, m.message, m.replacements, ) for m in matches]
+        return {
+            'corrected': is_correct,
+            'correction_percentage': round(correction_percentage, 2),
+            'approved': approval,
+            'suggestions': suggestions
+        }
+
+
+
+# 1. Add a function to get the grammar rules for a given text (done)
+# 2. Check whether some document is grammatically correct or not, and return the boolean result, not the corrected code (done)
+# 3. Return suggested grammar for a text (done)
+# 4. Check Grammar of plain text (done)
 
      
