@@ -1,5 +1,11 @@
 import language_tool_python
 from bs4 import BeautifulSoup
+from functools import lru_cache
+
+#Reuse the language tool
+@lru_cache(maxsize=1)
+def get_tool():
+    return language_tool_python.LanguageTool('en-US')
 
 class GrammarService:
     @staticmethod
@@ -8,7 +14,7 @@ class GrammarService:
         soup = BeautifulSoup(text, 'html.parser')
         # get space separated plain text
         plainText = soup.get_text(separator = ' ')
-        tool = language_tool_python.LanguageTool('en-US')
+        tool = get_tool()
 
         matches = tool.check(text)
 
