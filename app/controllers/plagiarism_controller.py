@@ -1,7 +1,7 @@
 from flask import request, Response, jsonify
-from app.services.palagrism_service import PlagrismService
+from app.services.plagiarism_service import PlagiarismService
 
-def check_plagrism():
+def check_plagiarism():
     
     data = request.get_json()
 
@@ -10,7 +10,7 @@ def check_plagrism():
     text = data['text']
     # Call grammer service to handle the rest
     try:
-     corrected = PlagrismService().check_plagrism(text)
+     corrected = PlagiarismService().check_plagiarism(text)
      return jsonify({'data': corrected}), 200
 
     except Exception as e:

@@ -5,10 +5,10 @@ import difflib
 from bs4 import BeautifulSoup
 
 
-class PlagrismService:
+class PlagiarismService:
 
     @staticmethod
-    def check_plagrism(input_text):
+    def check_plagiarism(input_text):
         pb = PocketBase("http://51.20.1.81:8080/")
         pb.admins.auth_with_password("test2345@gmail.com", "test@123") # GLOBAL USER AS OF NOW
         records = pb.collection("content").get_full_list(200) # GET ALL CONTENTS FROM DB
@@ -20,13 +20,13 @@ class PlagrismService:
          if record.body:
             content = record.body
          elif record.html_file:
-            content = PlagrismService().extract_html_file_content(record.html_file, record.id, 'content')
+            content = PlagiarismService().extract_html_file_content(record.html_file, record.id, 'content')
          elif record.html_content:
-            content = PlagrismService().extract_html_content(record.html_content)
+            content = PlagiarismService().extract_html_content(record.html_content)
          elif record.pdf_file:
-            content = PlagrismService().extract_pdf_file_content(record.pdf_file, record.id, 'content')
+            content = PlagiarismService().extract_pdf_file_content(record.pdf_file, record.id, 'content')
          elif record.source_url:
-            content = PlagrismService().extract_source_url_content(record.source_url)
+            content = PlagiarismService().extract_source_url_content(record.source_url)
         
          plagiarised_matches = []
          if content:
