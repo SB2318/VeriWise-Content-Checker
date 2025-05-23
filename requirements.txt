@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+pytesseract
+opencv-python
+numpy
+requests
+Pillow
+beautifulsoup4
+language_tool_python
+difflib
+pocketbase
+PyMuPDF
+
