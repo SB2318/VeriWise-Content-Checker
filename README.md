@@ -33,7 +33,7 @@
 Make sure you have the following Python packages installed:
 
 - fastapi
-- gunicorn
+- uvicorn
 
 - easyocr
 - opencv-python
