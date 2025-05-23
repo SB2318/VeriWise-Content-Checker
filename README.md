@@ -25,7 +25,7 @@
 Make sure you have the following Python packages installed:
 
 - fastapi
-- uvicorn
+- gunicorn
 
 - easyocr
 - opencv-python

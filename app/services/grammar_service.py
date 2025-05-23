@@ -63,6 +63,7 @@ class GrammarService:
         for tag in paragraphs:
          original_text = tag.get_text()
          matches = tool.check(original_text)
+      
 
          for match in sorted(matches, key=lambda m: m.offset, reverse=True):
            
@@ -80,8 +81,9 @@ class GrammarService:
                  "</span>" +
                  original_text[end:]
                )
-        tag.clear()
-        tag.append(BeautifulSoup(original_text, 'html.parser'))
+           
+         tag.clear()
+         tag.append(BeautifulSoup(original_text, 'html.parser'))
         res = str(soup)
 
         return {
