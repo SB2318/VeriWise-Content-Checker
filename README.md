@@ -9,14 +9,22 @@
 
 ---
 
-## 📸 Screenshot Examples
+# 📸 Screenshot Examples
 
-### Plagiarism Detection:
+## Copyright Checker
+
+
+![Screenshot 2025-05-24 002528](https://github.com/user-attachments/assets/00ebaaf9-85c1-42b7-a20a-65126b0baee9)
+
+
+## Plagiarism Detection:
+
 ![Screenshot 2025-05-21 002104](https://github.com/user-attachments/assets/1d037f72-d068-4586-b8f2-d08b25296ef3)
 
-### Grammar Suggestion:
+## Grammar Suggestion:
 
 ![WhatsApp Image 2025-05-21 at 12 20 51 AM](https://github.com/user-attachments/assets/dd412028-3ace-4eb9-9321-c4e3d0691c30)
+
 
 ---
 
