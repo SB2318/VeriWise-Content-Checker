@@ -6,7 +6,7 @@ restricted_keywords = [
     "patent pending", "registered trademark", "tm", "Ⓡ", "© [year]", "copyright holder",
     "copyright notice", "dmca", "digital millennium copyright act", "copyright infringement",
     "copyright law", "copyright protection", "copyright claim", "license agreement",
-    "proprietary content", "protected by copyright law",
+    "proprietary content", "protected by copyright law", "COPYRIGHTED"
 
     # --- Usage Restrictions ---
     "unauthorized use", "unauthorized reproduction", "not for redistribution",
