@@ -2,6 +2,7 @@ import language_tool_python
 import html
 from bs4 import BeautifulSoup
 from functools import lru_cache
+from app.utils.util import get_html_content
 
 #Reuse the language tool
 @lru_cache(maxsize=1)
@@ -14,6 +15,7 @@ class GrammarService:
     @staticmethod
     def parse_text(text):
         # Use the BeautiSoup library to parse html text first
+       
         soup = BeautifulSoup(text, 'html.parser')
         # get space separated plain text
         plainText = soup.get_text(separator = ' ')
@@ -56,11 +58,15 @@ class GrammarService:
    # FOR USER APP
     @staticmethod
     def render_grammar_suggestion(text):
+         # First get html content
+         ## Why? Cause, current setup of the method always expect an HTML content
+        text = get_html_content(text)
         soup = BeautifulSoup(text, 'html.parser')
         paragraphs = soup.find_all(['p', 'h1', 'h2','h3'])
         tool = get_tool()
 
         for tag in paragraphs:
+         #print(tag)
          original_text = tag.get_text()
          matches = tool.check(original_text)
       
@@ -68,6 +74,7 @@ class GrammarService:
          for match in sorted(matches, key=lambda m: m.offset, reverse=True):
            
             if match.replacements:
+              #print(match.replacements)
               start, end = match.offset, match.offset + match.errorLength
               replacement =  match.replacements[0]
               
@@ -91,9 +98,6 @@ class GrammarService:
             'suggestions': res
         }
 
-# 1. Add a function to get the grammar rules for a given text (done)
-# 2. Check whether some document is grammatically correct or not, and return the boolean result, not the corrected code (done)
-# 3. Return suggested grammar for a text (done)
-# 4. Check Grammar of plain text (done)
+
 
      

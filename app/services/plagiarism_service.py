@@ -1,26 +1,37 @@
 from pocketbase import PocketBase
 import requests
 import fitz
-
+import os
 from bs4 import BeautifulSoup
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from cachetools import TTLCache, cached
+from app.utils.util import get_html_content
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 # 12 hour in sec
 pocketbase_cache = TTLCache(maxsize=1, ttl=43200)
+pocketbase_cache.clear()
 
 @cached(pocketbase_cache)
 def get_all_pocketbase_content():
-    pb = PocketBase("http://51.20.1.81:8080/")
-    pb.admins.auth_with_password("test2345@gmail.com", "test@123")
+    url = os.getenv("DATASOURCE_URL")
+    username = os.getenv("DATASOURCE_USERNAME")
+    password = os.getenv("DATASOURCE_PASSWORD")
+    pb = PocketBase(url)
+    pb.admins.auth_with_password(username, password)
     return pb.collection("content").get_full_list(200)
 
 class PlagiarismService:
 
     @staticmethod
     def check_plagiarism(input_text):
-      
+         # First get html content
+         ## Why? Cause, current setup of the method always expect an HTML content
+        input_text = get_html_content(input_text)
         records = get_all_pocketbase_content()
 
         contents = []

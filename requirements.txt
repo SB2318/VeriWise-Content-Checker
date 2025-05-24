@@ -12,3 +12,4 @@ difflib
 pocketbase
 PyMuPDF
 cachetools
+python-dotenv

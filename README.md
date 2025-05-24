@@ -34,20 +34,18 @@ Make sure you have the following Python packages installed:
 
 - fastapi
 - gunicorn
-
 - easyocr
 - opencv-python
 - numpy
 - requests
 - Pillow
 - difflib
-
 - beautifulsoup4
 - language_tool_python
-
 - scikit-learn
 - pocketbase  # Datasource for plagiarism detection
 - PyMuPDF
+- python-dotenv
 
 
 You can install all dependencies using:
