@@ -1,5 +1,5 @@
-flaskapi
-gunicorn
+fastapi
+uvicorn
 numpy
 easyocr
 opencv-python
