@@ -23,7 +23,7 @@
 
 ## Grammar Suggestion:
 
-![WhatsApp Image 2025-05-21 at 12 20 51 AM](https://github.com/user-attachments/assets/dd412028-3ace-4eb9-9321-c4e3d0691c30)
+![Screenshot 2025-05-24 015527](https://github.com/user-attachments/assets/2b9f7b3d-5b42-40fa-8c8f-03fbd22fc4b7)
 
 
 ---
@@ -33,7 +33,8 @@
 Make sure you have the following Python packages installed:
 
 - fastapi
-- gunicorn
+- uvicorn
+
 - easyocr
 - opencv-python
 - numpy
@@ -79,7 +80,7 @@ uvicorn main:app --reload
 
 or
 
-python run.py
+python main.py
 
 ```
 4. Open your web browser and navigate to `http://127.0.0.1:5000`
