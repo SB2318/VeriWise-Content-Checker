@@ -3,8 +3,6 @@ uvicorn
 numpy
 easyocr
 opencv-python
-requests
-Pillow
 beautifulsoup4
 language_tool_python
 scikit-learn
