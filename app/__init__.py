@@ -12,6 +12,10 @@ from fastapi import FastAPI
 from app.routes.routes import register_routes
 
 def create_app():
-    app = FastAPI()
+    app = FastAPI(
+        title="Content Intelligence API",
+        description="API for Content verification",
+        version="1.0.0",
+    )
     register_routes(app)
     return app

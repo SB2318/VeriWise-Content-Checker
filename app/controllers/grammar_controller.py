@@ -1,19 +1,35 @@
 # from flask import request, Response, jsonify
-from app.services.grammar_service import GrammarService
-from fastapi import  Request
+from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse, HTMLResponse
 
-async def check_grammar(request: Request):
+from app.services.grammar_service import GrammarService
+from app.models.grammar_plagiarism_model import GrammarCheckRequestModel, GrammarCheckResponseModel
+from app.models.error_model import ErrorResponse
+
+router = APIRouter(prefix="/grammar", tags=["Grammar"])
+
+@router.post(
+'/check-grammar', 
+summary='Check grammar score in submitted text',
+description='Analyzes submitted content and returns the score and whether it is accepted or not',
+response_description = 'Score Card',
+response_model = GrammarCheckResponseModel,
+responses={
+        400: {"model": ErrorResponse, "description": "Missing or invalid input"},
+        500: {"model": ErrorResponse, "description": "Internal server error"}
+}
+)
+async def check_grammar(request: GrammarCheckRequestModel)-> GrammarCheckResponseModel:
     # This function checks the grammar of a sentence
     # It will take HTML Text as an input, and convert it to plain text
     # Then it will use the language tool to check the grammar of the text
     # data = request.get_json()
-    data = await request.json()
-
-    if not data or 'text' not in data:
+    # data = await request.json()
+    text = request.text
+    if not text:
         # return jsonify({'error': 'Missing text'}), 400
         return JSONResponse(content={'error': 'Missing text'}, status_code=400)
-    text = data['text']
+    # text = data['text']
     # Call grammer service to handle the rest
     try:
      corrected = GrammarService().parse_text(text)
@@ -25,15 +41,27 @@ async def check_grammar(request: Request):
      return JSONResponse(content={'error': str(e)}, status_code=500)
 
 
-async def render_suggestion(request:Request):
+
+@router.post(
+    '/render-suggestions',
+    summary='Render suggestions for the given text with highlights',
+    description='Accepts a block of text, analyzes it for grammar suggestions, and returns the highlighted response.',
+    response_description ='an html page',
+    response_class = HTMLResponse,
+    responses={
+        400: {"model": ErrorResponse, "description": "Missing or invalid input"},
+        500: {"model": ErrorResponse, "description": "Internal server error"}
+    }
+)
+async def render_suggestion(request:GrammarCheckRequestModel)-> HTMLResponse:
 
     #data = request.get_json()
-    data = await request.json()
-
-    if not data or 'text' not in data:
+    # data = request
+    text = request.text
+    if not text:
         #return jsonify({'error': 'Missing text'}), 400
         return JSONResponse(content={'error': 'Missing text'}, status_code=400)
-    text = data['text']
+    # text = data['text']
     # Call grammer service to handle the rest
     try:
      corrected = GrammarService().render_grammar_suggestion(text)

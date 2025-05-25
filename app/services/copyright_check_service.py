@@ -67,7 +67,7 @@ class CopyrightCheckerService:
        else:
             return {
                 "detected_keywords": [],
-                "copyright_exist": False
+                "copyright_found": False
             }
        
     

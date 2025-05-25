@@ -52,7 +52,7 @@ class GrammarService:
             'corrected': is_correct,
             'correction_percentage': round(correction_percentage, 2),
             'approved': approval,
-             'score': score_out_of_10
+            'score': score_out_of_10
         }
 
    # FOR USER APP
