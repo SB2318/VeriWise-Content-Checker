@@ -18,7 +18,8 @@ def create_app():
         version="1.0.0",
     )
     origins = [
-    "https://veriwise-swagger-ui.vercel.app",  
+    "https://veriwise-swagger-ui.vercel.app", 
+    'http://127.0.0.1:5500'
     ]
     app.add_middleware(
     CORSMiddleware,
