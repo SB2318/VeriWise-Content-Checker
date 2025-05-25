@@ -89,6 +89,41 @@ python main.py
 ```
 4. Open your web browser and navigate to `http://127.0.0.1:5000`
 
+
+## 🚀 Run with Docker
+
+Easily build and run the Veriwise Content Checker using Docker.
+
+---
+
+### 🐳 Prerequisites
+
+- ✅ [Install Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- 🚀 Ensure Docker Desktop is **running** before executing commands.
+
+---
+  
+### ⚙️ Step 1: Build the Docker Image
+
+   ```
+   docker build -t veriwise-content-checker .
+   ```
+
+ ### ⚙️ Step 2: Run the app in a docker container 
+
+   ```
+    # Option 1: (Detached Mode)
+    docker run -d -p 8000:8000 veriwise-content-checker
+
+    # Option 2: Run in Interactive Mode (for development/debugging)
+
+    docker run -it -p 8000:8000 veriwise-content-checker /bin/sh
+    In the terminal enter
+    uvicorn main:app --reload
+
+   ```
+Check api documentation at http://localhost:8080/docs
+
 ## ⚙️ Features Overview
 
 - **Plagiarism Detection:** Submit text to check for similarity against existing content.
