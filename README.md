@@ -9,6 +9,10 @@
 
 ---
 
+## 📄 API Documentation (Swagger UI)
+
+🔗 [See Documentation](https://veriwise-swagger-ui.vercel.app/)
+
 # 📸 Screenshot Examples
 
 ## Copyright Checker
