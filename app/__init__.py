@@ -10,12 +10,22 @@
 
 from fastapi import FastAPI
 from app.routes.routes import register_routes
-
+from fastapi.middleware.cors import CORSMiddleware
 def create_app():
     app = FastAPI(
         title="Content Intelligence API",
         description="API for Content verification",
         version="1.0.0",
+    )
+    origins = [
+    "https://veriwise-swagger-ui.vercel.app",  
+    ]
+    app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
     )
     register_routes(app)
     return app
