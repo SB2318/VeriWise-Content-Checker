@@ -3,7 +3,7 @@ from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse, HTMLResponse
 
 from app.services.grammar_service import GrammarService
-from app.models.grammar_plagiarism_model import GrammarCheckRequestModel, GrammarCheckResponseModel
+from app.models.grammar_plagiarism_model import GrammarCheckRequestModel, GrammarCheckResponseModel, RenderSuggestionModel
 from app.models.error_model import ErrorResponse
 
 router = APIRouter(prefix="/grammar", tags=["Grammar"])
@@ -34,7 +34,7 @@ async def check_grammar(request: GrammarCheckRequestModel)-> GrammarCheckRespons
     try:
      corrected = GrammarService().parse_text(text)
      # return jsonify({'corrected': corrected}), 200
-     return JSONResponse(content={'corrected': corrected}, status_code=200)
+     return GrammarCheckResponseModel(corrected=corrected)
 
     except Exception as e:
      # return jsonify({'error': str(e)}), 500
@@ -47,7 +47,7 @@ async def check_grammar(request: GrammarCheckRequestModel)-> GrammarCheckRespons
     summary='Render suggestions for the given text with highlights',
     description='Accepts a block of text, analyzes it for grammar suggestions, and returns the highlighted response.',
     response_description ='an html page',
-    response_class = HTMLResponse,
+    response_model = RenderSuggestionModel,
     responses={
         400: {"model": ErrorResponse, "description": "Missing or invalid input"},
         500: {"model": ErrorResponse, "description": "Internal server error"}
@@ -87,7 +87,8 @@ async def render_suggestion(request:GrammarCheckRequestModel)-> HTMLResponse:
         </body>
         </html>
         """
-     return HTMLResponse(content= full_html, status_code=200)
+     return RenderSuggestionModel(full_html=full_html, suggestion=html_content)
+
 
     except Exception as e:
      #return jsonify({'error-h': str(e)}), 500

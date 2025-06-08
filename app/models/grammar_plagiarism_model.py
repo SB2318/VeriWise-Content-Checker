@@ -22,3 +22,6 @@ class PlagiarismCheckResponseModel(BaseModel):
       data: PlagiarismCheckResult = Field(..., description="Response data")
 
 
+class RenderSuggestionModel(BaseModel):
+      full_html : str = Field(..., description="Full HTML of the rendered text")
+      suggestion: str = Field(..., description="Suggestion for the text")
