@@ -94,7 +94,8 @@ class PlagiarismService:
     @staticmethod
     def extract_html_file_content(file_name, record_id, collection_name):
          try:
-           file_url = f"http://51.20.1.81:8080/api/files/{collection_name}/{record_id}/{file_name}"
+           url = os.getenv("BASE_URL")
+           file_url = f"{url}/api/files/{collection_name}/{record_id}/{file_name}"
            response = requests.get(file_url, stream=True)
            response.raise_for_status()
            soup = BeautifulSoup(response.text, 'html.parser')
@@ -116,7 +117,8 @@ class PlagiarismService:
     @staticmethod
     def extract_pdf_file_content(file_name, record_id, collection_name):
           try:
-            file_url = f"http://51.20.1.81:8080/api/files/{collection_name}/{record_id}/{file_name}"
+            url = os.getenv("BASE_URL")
+            file_url = f"{url}/api/files/{collection_name}/{record_id}/{file_name}"
             response = requests.get(file_url, stream=True)
             response.raise_for_status()
         
