@@ -109,7 +109,7 @@ class PlagiarismService:
    
     @staticmethod
     def extract_html_content(html_content):
-        soup = BeautifulSoup(response.text, 'html.parser')
+        soup = BeautifulSoup(html_content, 'html.parser')
         text = soup.get_text(separator=' ', strip=True)
 
         return text
