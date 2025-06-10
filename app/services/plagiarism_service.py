@@ -36,7 +36,6 @@ class PlagiarismService:
 
         contents = []
         titles = []
-
         # Iterate through each record and compare content
         for record in records:
          # Determine the content source
