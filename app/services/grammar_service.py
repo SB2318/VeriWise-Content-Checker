@@ -65,6 +65,7 @@ class GrammarService:
         paragraphs = soup.find_all(['p', 'h1', 'h2','h3'])
         tool = get_tool()
 
+        edits = []
         for tag in paragraphs:
          #print(tag)
          original_text = tag.get_text()
@@ -72,22 +73,25 @@ class GrammarService:
       
 
          for match in sorted(matches, key=lambda m: m.offset, reverse=True):
-           
-            if match.replacements:
+            #print(f"Match: {match}, Replacements: {match.replacements}, Type: {type(match.replacements)}")
+
+            if match.replacements and len(match.replacements) > 0:
               #print(match.replacements)
               start, end = match.offset, match.offset + match.errorLength
               replacement =  match.replacements[0]
               
               # Inject <span> tag with suggestion
               
+              if start >= 0 and end <= len(original_text):
+                 suggestion_html = (
+                        f"<span style='background-color: yellow;' title='Suggested: {replacement}'>"
+                        f"{replacement}</span>"
+                    )
 
-              original_text = (
-                 original_text[:start] +
-                 f"<span style='background-color: yellow;' title='Suggested: {replacement}'>" +
-                 replacement +
-                 "</span>" +
-                 original_text[end:]
-               )
+                 edits.append((start, end, suggestion_html))
+
+         for start, end, suggestion_html in sorted(edits, key=lambda x: x[0], reverse=True):
+            original_text = original_text[:start] + suggestion_html + original_text[end:]
            
          tag.clear()
          tag.append(BeautifulSoup(original_text, 'html.parser'))
