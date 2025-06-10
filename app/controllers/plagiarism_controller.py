@@ -1,7 +1,7 @@
 # from flask import request, Response, jsonify
 from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse
-from app.services.plagiarism_service import PlagiarismService
+from app.services.plagiarism_service2 import PlagiarismService
 from app.models.grammar_plagiarism_model import  GrammarCheckRequestModel, PlagiarismCheckResponseModel
 from app.models.error_model import ErrorResponse
 
