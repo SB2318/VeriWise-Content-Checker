@@ -2,7 +2,7 @@
 restricted_keywords = [
 
     # --- Copyright / Legal Terms ---
-    "copyright ©", "copyrighted", "intellectual property", "ip rights", "trademark",
+   "©", "copyright ©", "copyrighted", "intellectual property", "ip rights", "trademark",
     "patent pending", "registered trademark", "tm", "Ⓡ", "© [year]", "copyright holder",
     "copyright notice", "dmca", "digital millennium copyright act", "copyright infringement",
     "copyright law", "copyright protection", "copyright claim", "license agreement",
