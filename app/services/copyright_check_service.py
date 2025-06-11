@@ -42,7 +42,9 @@ class CopyrightCheckerService:
 
        # Define some predefine keyword and try to find the match
        detected_keywords = []
+       full_text =[]
        for (bbox, text, prob) in data:
+         full_text.append(text)
          for keyword in restricted_keywords:
             #print(keyword.lower())
             #print(text.lower())
@@ -62,12 +64,14 @@ class CopyrightCheckerService:
        if detected_keywords:
             return {
                 "copyrighted_content": detected_keywords,
-                "copyright_found": True
+                "copyright_found": True,
+                "extracted_text": " ".join(full_text) # Now it also returns the information extracted from the image
             }
        else:
             return {
                 "detected_keywords": [],
-                "copyright_found": False
+                "copyright_found": False,
+                "extracted_text": " ".join(full_text) # Now it also returns the information extracted from the image
             }
        
     

@@ -12,6 +12,7 @@ class DetectedKeyword(BaseModel):
 class CopyrightCheck(BaseModel):
       copyrighted_content: List[DetectedKeyword] = Field(..., description="List of detected keywords that are copyrighted")
       copyright_found: bool = Field(..., description="Whether copyright was found in the image or not")
+      extracted_text: str = Field(..., description="Returns the information extracted from the image")
 
 class CopyrightCheckResponse(BaseModel):
       data: CopyrightCheck = Field(..., description="Copyright detection result data")
